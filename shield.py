@@ -159,7 +159,7 @@ def rakan_shield():
 
 def viego_shield():
     viego_multiplier = 0.35
-    aery_base = 80 + (0.25 + lux_ap())  # Aery will only proc once for final number. Don't know who it will proc on yet
+    aery_base = 80 + (0.25 + ivern_ap())  # Aery will only proc once for final number. Predicting it will proc on Ivern
     return ((lux_shield() * (1 + viego_multiplier)) * 2) \
            + (ivern_shield() * (1 + viego_multiplier)) \
            + (lee_sin_shield() * (1 + viego_multiplier)) \
@@ -200,7 +200,6 @@ def main():
     print("Rakan Total AP: " + str(rakan_ap()))
     print("Rakan Total Shielding: " + str(rakan_shield()))
     print("Viego Total Shielding: " + str(viego_shield()))
-    print("Tahm Kench Total AP: " + str(tahm_kench_ap()))
     print("Tahm Kench Total Health: " + str(tahm_kench_health()))
     print("Tahm Kench Total Shielding: " + str(tahm_kench_shield()))
     print("Total Shielding: " + str(total_shield()))
