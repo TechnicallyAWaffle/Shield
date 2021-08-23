@@ -16,12 +16,12 @@ LEE_SIN = 405  # Everfrost, Mejais, Rabadons, Ardent Censer, Mikaels, Redemption
 RAKAN = 475  # Everfrost, Mejais, Rabadons, Seraphs, Mikaels, Redemption
 TAHM_HEALTH = 2050  # Moonstone Renewer, Redemption, Spirit Visage, Warmogs, Gargoyle Stoneplate
 # TAHM_HEALTH = 1500  # Starcaster , Redemption, Spirit Visage, Vigilant Wardstone, Gargoyle Stoneplate
-TAHM = 40  # Moonstone Renewer
+# TAHM_HEALTH = 2700  # Frostfire Gauntlet, Redemption, Spirit Visage, Warmogs, Gargoyle Stoneplate
 AP_RUNES = 78  # Double Adaptive + Absolute Focus + Waterwalking
 AP_BUFFS = 175  # Baron + Elixir + Staff of Flowing Water
 HP_RUNES = 90  # Health Shard
 HP_BUFFS = 300  # Elixir of Iron
-AP_MULTIPLIER = 0.35  # Rabadons
+AP_MULTIPLIER = 0.51  # Rabadons + 4 Infernal Drakes
 SHIELD_MULTIPLIER = 0.5  # Revitalize outgoing + Revitalize incoming + Tahm's Revitalize + Spirit Visage
 SELF_SHIELD_MULTIPLIER = 0.4  # Revitalize incoming + Revitalize + Spirit Visage
 
@@ -105,10 +105,6 @@ def tahm_kench_health():
     return (2185 + TAHM_HEALTH + HP_RUNES + HP_BUFFS + (600 + (0.5 * lulu_ap()))) * 1.12
 
 
-def tahm_kench_ap():
-    return (TAHM + AP_RUNES + (AP_BUFFS - 50)) * (1 + 0.12)  # Uses Elixir of Iron instead
-
-
 def sylas_shield():
     sylas_base = (800 + (2.16 * sylas_ap())) + (590 * 0.28)  # Moonstone + Redemption + Health Shard
     aery_base = 80 + (0.25 * sylas_ap())
@@ -173,14 +169,12 @@ def viego_shield():
 
 def tahm_kench_shield():
     tahm_kench_base = tahm_kench_health() * 3
-    guardian_proc_damage = 251
-    guardian_base = (150 + (0.15 * tahm_kench_ap()) + (0.09 * (tahm_kench_health() - 2185)) - guardian_proc_damage)
+    steraks_proc_damage = 100
     barrier = 455
     gargoyle_stoneplate = (tahm_kench_health() - 2185)
-    steraks_gage = (100 + (0.4 * tahm_kench_health())) - guardian_proc_damage
+    steraks_gage = (100 + (0.4 * tahm_kench_health())) - steraks_proc_damage
     tahm_kench_multiplier = 0.35 + 0.2  # Moonstone Renewer + Redemption
     return (tahm_kench_base * (1 + tahm_kench_multiplier + SELF_SHIELD_MULTIPLIER)) \
-           + (guardian_base * (1 + tahm_kench_multiplier + SELF_SHIELD_MULTIPLIER)) \
            + (barrier * (1 + tahm_kench_multiplier + SELF_SHIELD_MULTIPLIER)) \
            + (gargoyle_stoneplate * (1 + tahm_kench_multiplier + SELF_SHIELD_MULTIPLIER)) \
            + (steraks_gage * (1 + tahm_kench_multiplier + SELF_SHIELD_MULTIPLIER))
